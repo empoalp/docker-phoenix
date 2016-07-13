@@ -1,8 +1,6 @@
-FROM trenpixster/elixir
+FROM elixir
 
-# Curl required to install nodejs
-# Nodejs required to run brunch tasks
-# inotify-tools for livereload
+WORKDIR /code
 
 RUN apt-get update \
     && apt-get install -y curl inotify-tools \
@@ -13,4 +11,8 @@ RUN apt-get update \
 
 RUN mix local.hex --force \
     && mix local.rebar --force \
-    && mix archive.install https://github.com/phoenixframework/phoenix/releases/download/v1.1.0/phoenix_new-1.1.0.ez
+    && mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez
+    && mix phoenix.new /code
+    && mix do deps.get, compile
+    && npm install
+
