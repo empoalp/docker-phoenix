@@ -11,8 +11,8 @@ RUN apt-get update \
 
 RUN mix local.hex --force \
     && mix local.rebar --force \
-    && mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez
-    && mix phoenix.new /code
-    && mix do deps.get, compile
+    && mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez \
+    && mix phoenix.new /code \
+    && mix do deps.get, compile \
     && npm install
 
